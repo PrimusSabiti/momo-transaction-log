@@ -1,0 +1,42 @@
+A1-01	new list: empty(), size()	true, 0	true, 0	PASS
+A1-02	removeAt(0) on an empty list	false	false	PASS
+A1-03	front(), back(), at(0) on an empty list	all nullptr	all nullptr	PASS
+A1-04	removeWhere and popFront on an empty list	false, false	false, false	PASS
+A1-05	one record: size, front id, back id	1, 1, 1	1, 1, 1	PASS
+A1-06	one record: removeAt(0), then pushBack(7)	true, removed 1, empty / front 7 back 7	true, removed 1, empty / front 7 back 7	PASS
+A1-07	pushBack 1,2,3: order and back id	1,2,3, back 3	1,2,3, back 3	PASS
+A1-08	pushFront(0): order and front id	0,1,2,3, front 0	0,1,2,3, front 0	PASS
+A1-09	duplicate key: two transactions of amount 70 are both stored	2, 1,2	2, 1,2	PASS
+A1-10	removeAt(0): remove the FIRST record	true, removed 1, left 2,3,4,5, front 2	true, removed 1, left 2,3,4,5, front 2	PASS
+A1-11	removeAt(size-1): remove the LAST record (tail moves back)	true, removed 5, left 2,3,4, back 4	true, removed 5, left 2,3,4, back 4	PASS
+A1-12	pushBack after removing the last record	2,3,4,9, back 9	2,3,4,9, back 9	PASS
+A1-13	removeAt(1): remove a middle record	true, removed 3, left 2,4,9	true, removed 3, left 2,4,9	PASS
+A1-14	removeAt(99): invalid position	false, unchanged 2,4,9	false, unchanged 2,4,9	PASS
+A1-15	removeWhere: absent id 555, then present id 4	false / true, removed 4, left 2,9	false / true, removed 4, left 2,9	PASS
+A1-16	popFront	true, popped 2, left 9	true, popped 2, left 9	PASS
+A1-17	findWhere id 2 and edit the amount through the pointer; findWhere an absent id	999, nullptr	999, nullptr	PASS
+A1-18	copy constructor is deep: change the copy, original unchanged	orig 1,2,3 / copy 2,3,9	orig 1,2,3 / copy 2,3,9	PASS
+A1-19	copy assignment is deep; self-assignment is safe	orig 1,2,3 / copy 2,3	orig 1,2,3 / copy 2,3	PASS
+A1-20	insertAt: front, middle, end, and an invalid position	true,true,true,false / 5,10,15,20,25 / back 25	true,true,true,false / 5,10,15,20,25 / back 25	PASS
+A1-21	reverse: 1..5, then pushBack(0) (tail correct); reverse of empty and of one record	5,4,3,2,1,0 / (empty) / 8	5,4,3,2,1,0 / (empty) / 8	PASS
+A1-22	10,000 pushBack calls: size, front id, back id	10000, 1, 10000	10000, 1, 10000	PASS
+A1-23	load transactions.txt (12 valid records)	12 loaded, 0 skipped	12 loaded, 0 skipped	PASS
+A1-24	load a file that does not exist	-1	-1	PASS
+A1-25	remove 6008, add 6040, save, reload	true, 12, 6021,6015,6002,6030,6011,6026,6004,6019,6007,6033,6012,6040	true, 12, 6021,6015,6002,6030,6011,6026,6004,6019,6007,6033,6012,6040	PASS
+A1-26	file with 6 bad lines (junk, type loan, amount -5, missing field, short phone, repeated id 1) and 2 good	2 loaded, 6 skipped, ids 1,6	2 loaded, 6 skipped, ids 1,6	PASS
+A2-01	both sorts on an empty array	no crash, (empty)	no crash, (empty)	PASS
+A2-02	both sorts on one record	1 / 1	1 / 1	PASS
+A2-03	already sorted input (insertion / merge)	1,2,3,4,5,6 / 1,2,3,4,5,6	1,2,3,4,5,6 / 1,2,3,4,5,6	PASS
+A2-04	reversed input (60,60,40,40,20,20); equal amounts keep input order	5,6,3,4,1,2 / 5,6,3,4,1,2	5,6,3,4,1,2 / 5,6,3,4,1,2	PASS
+A2-05	500 random records (many equal amounts) compared with std::stable_sort	identical, identical	identical, identical	PASS
+A2-06	stability: sample log (in time order) ranked by amount, biggest first; ties stay in time order	6011,6019,6007,6021,6002,6033,6015,6026,6008,6030,6004,6012 / 6011,6019,6007,6021,6002,6033,6015,6026,6008,6030,6004,6012	6011,6019,6007,6021,6002,6033,6015,6026,6008,6030,6004,6012 / 6011,6019,6007,6021,6002,6033,6015,6026,6008,6030,6004,6012	PASS
+A2-07	sort by a different field (phone); input ids 3,1,4,2	1,2,3,4 / 1,2,3,4	1,2,3,4 / 1,2,3,4	PASS
+A2-08	binary search in an empty array	-1	-1	PASS
+A2-09	binary search, one record: present key 50 / absent key 40	0 / -1	0 / -1	PASS
+A2-10	duplicate key: search for amount 2000 returns the FIRST occurrence	1	1	PASS
+A2-11	search the first key (1000) and the last key (3000)	0 / 4	0 / 4	PASS
+A2-12	search absent keys: below (500), between (2500), above (9999)	-1 / -1 / -1	-1 / -1 / -1	PASS
+A2-13	sample log copied to an array, sorted by id, search id 6026 / absent id 6099	phone 0772770007 / -1	phone 0772770007 / -1	PASS
+A2-14	id-sorted copy re-sorted by time restores the chronological order of the file	6021,6008,6015,6002,6030,6011,6026,6004,6019,6007,6033,6012	6021,6008,6015,6002,6030,6011,6026,6004,6019,6007,6033,6012	PASS
+
+RESULT: 40 passed, 0 failed
